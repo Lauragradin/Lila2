@@ -1,0 +1,878 @@
+{
+	"application": {
+		"title": "Lila2",
+		"theme": "bootswatch-flatly",
+		"collections": [
+			{
+				"name": "clients",
+				"fields": [
+					{
+						"name": "name",
+						"title": "Nombre",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "dni",
+						"title": "DNI",
+						"type": "string",
+						"required": true
+					},
+					{
+						"name": "mobilePhoneNumber",
+						"title": "Teléfono móvil",
+						"type": "string"
+					},
+					{
+						"name": "phoneNumber",
+						"title": "Teléfono fijo",
+						"type": "string"
+					},
+					{
+						"name": "email",
+						"title": "Email",
+						"type": "email"
+					},
+					{
+						"name": "whatsApp",
+						"title": "¿Tiene WhatsApp?",
+						"type": "bool",
+						"input": "checkbox"
+					},
+					{
+						"name": "notes",
+						"title": "Notas",
+						"input": "textarea",
+						"type": "string"
+					},
+					{
+						"name": "busStop",
+						"title": "Parada",
+						"type": "string",
+						"input": "select"
+					},
+					{
+						"name": "partner",
+						"title": "Acompañante",
+						"type": "string",
+						"input": "select"
+					},
+					{
+						"name": "relations",
+						"title": "Amigos",
+						"type": "string",
+						"input": "select-multiple"
+					}
+				],
+				"type": "collection"
+			},
+			{
+				"name": "suppliers",
+				"fields": [
+					{
+						"name": "name",
+						"title": "Nombre",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "cif",
+						"title": "CIF",
+						"type": "string"
+					},
+					{
+						"name": "type",
+						"title": "Tipo de servicio",
+						"input": "select",
+						"input_items": [
+							{
+								"value": "hotel",
+								"title": "Hotel"
+							},
+							{
+								"value": "bus",
+								"title": "Empresa de autobuses"
+							},
+							{
+								"value": "restaurant",
+								"title": "Restaurante"
+							},
+							{
+								"value": "other",
+								"title": "Otro"
+							},
+							{
+								"value": "wholesale",
+								"title": "Mayorista de viajes"
+							}
+						],
+						"type": "string"
+					},
+					{
+						"name": "mobilePhoneNumber",
+						"title": "Teléfono móvil",
+						"type": "string"
+					},
+					{
+						"name": "phoneNumber",
+						"title": "Teléfono fijo",
+						"type": "string"
+					},
+					{
+						"name": "email",
+						"title": "E-mail",
+						"type": "email"
+					},
+					{
+						"name": "webpage",
+						"title": "Página web",
+						"type": "string"
+					},
+					{
+						"name": "contactPerson",
+						"title": "Persona de contacto",
+						"type": "string"
+					},
+					{
+						"name": "whatsApp",
+						"title": "¿Tiene WhatsApp?",
+						"type": "string",
+						"input": "checkbox"
+					},
+					{
+						"name": "notes",
+						"title": "Notas",
+						"input": "textarea",
+						"type": "string"
+					},
+					{
+						"name": "tags",
+						"title": "Tags",
+						"type": "array",
+						"input": "tags"
+					}
+				],
+				"type": "collection"
+			},
+			{
+				"name": "busStops",
+				"type": "collection",
+				"fields": [
+					{
+						"name": "name",
+						"title": "Nombre",
+						"type": "string"
+					},
+					{
+						"name": "street",
+						"title": "Calle",
+						"type": "string",
+						"required": true
+					},
+					{
+						"name": "council",
+						"title": "Municipio",
+						"type": "string"
+					},
+					{
+						"name": "zipCode",
+						"title": "CP",
+						"type": "string"
+					},
+					{
+						"name": "province",
+						"title": "Provincia",
+						"type": "string"
+					},
+					{
+						"name": "country",
+						"title": "País",
+						"type": "string"
+					},
+					{
+						"name": "latitude",
+						"title": "Latitud",
+						"type": "float"
+					},
+					{
+						"name": "longitude",
+						"title": "Longitud",
+						"type": "string"
+					}
+				]
+			},
+			{
+				"name": "seats",
+				"type": "collection",
+				"fields": [
+					{
+						"name": "occupied",
+						"title": "Ocupado",
+						"type": "bool",
+						"default": "false"
+					},
+					{
+						"name": "reserved",
+						"title": "Reservadoo",
+						"type": "bool",
+						"default": "false"
+					},
+					{
+						"name": "traveler",
+						"title": "Ciente",
+						"type": "string",
+						"input": "select"
+					}
+				]
+			},
+			{
+				"name": "travelers",
+				"type": "collection",
+				"fields": [
+					{
+						"name": "travel",
+						"title": "Viaje",
+						"type": "string",
+						"input": "select"
+					},
+					{
+						"name": "client",
+						"title": "Cliente",
+						"type": "string",
+						"input": "select"
+					},
+					{
+						"name": "bus",
+						"title": "Autobús",
+						"type": "array",
+						"input": "select-multiple"
+					},
+					{
+						"name": "stops",
+						"title": "Parada",
+						"type": "array",
+						"input": "select-multiple"
+					},
+					{
+						"name": "plannedTakeOffTime",
+						"title": "Hora de recogida",
+						"type": "date",
+						"format": "hh:mm"
+					},
+					{
+						"name": "effectiveTakeOffTime",
+						"title": "Hora de recogida real",
+						"type": "string",
+						"format": "hh:mm"
+					},
+					{
+						"name": "takeOffNoticed",
+						"title": "¿Avisado?",
+						"type": "bool",
+						"input": "radio",
+						"input_items": [
+							{
+								"value": "yes",
+								"title": "Sí"
+							},
+							{
+								"value": "no",
+								"title": "No"
+							}
+						]
+					},
+					{
+						"name": "takeOffNoticedTime",
+						"title": "Hora a la que fue avisado.",
+						"type": "string",
+						"format": "hh:mm"
+					},
+					{
+						"name": "notPresented",
+						"title": "¿Ausente?",
+						"type": "bool",
+						"default": "false"
+					},
+					{
+						"name": "notes",
+						"title": "Notas",
+						"type": "string",
+						"input": "textarea"
+					},
+					{
+						"name": "payments",
+						"title": "Pagos",
+						"type": "array",
+						"input": "select-multiple"
+					}
+				]
+			},
+			{
+				"name": "travelBuses",
+				"type": "collection",
+				"fields": [
+					{
+						"name": "supplier",
+						"title": "Proveedor",
+						"type": "string",
+						"input": "select"
+					},
+					{
+						"name": "name",
+						"title": "Nombre",
+						"type": "string"
+					},
+					{
+						"name": "capacity",
+						"title": "Capacidad",
+						"type": "integer"
+					},
+					{
+						"name": "responsible",
+						"title": "Persona responsable",
+						"type": "string"
+					},
+					{
+						"name": "seats",
+						"title": "Asientos",
+						"type": "array"
+					},
+					{
+						"name": "stops",
+						"title": "Paradas",
+						"type": "array",
+						"input": "select-multiple"
+					},
+					{
+						"name": "driver",
+						"title": "Nombre",
+						"type": "string"
+					},
+					{
+						"name": "phonenumber",
+						"title": "Número de teléfono",
+						"type": "string"
+					},
+					{
+						"name": "mobileNumber",
+						"title": "Teléfono móvil",
+						"type": "string"
+					},
+					{
+						"name": "email",
+						"title": "Email",
+						"type": "email"
+					},
+					{
+						"name": "notes",
+						"title": "Notas",
+						"type": "string"
+					},
+					{
+						"name": "whatsapp",
+						"title": "¿Tiene whatsapp?",
+						"type": "string",
+						"input": "checkbox"
+					}
+				]
+			},
+			{
+				"name": "travels",
+				"type": "collection",
+				"fields": [
+					{
+						"name": "name",
+						"title": "Nombre",
+						"type": "string"
+					},
+					{
+						"name": "departureDay",
+						"title": "Día de salida",
+						"type": "date",
+						"input": "datepicker"
+					},
+					{
+						"name": "departureTime",
+						"title": "Hora de salida",
+						"type": "date",
+						"format": "hh:mm"
+					},
+					{
+						"name": "returnDay",
+						"title": "Día de llegada",
+						"type": "date",
+						"input": "datepicker"
+					},
+					{
+						"name": "returnTime",
+						"title": "Hora de llegada",
+						"type": "date",
+						"format": "hh:mm"
+					},
+					{
+						"name": "destiny",
+						"title": "Destino",
+						"type": "string"
+					},
+					{
+						"name": "description",
+						"title": "Descripción",
+						"type": "string",
+						"input": "textarea"
+					},
+					{
+						"name": "buses",
+						"title": "Autobuses",
+						"type": "array",
+						"input": "select-multiple"
+					},
+					{
+						"name": "stops",
+						"title": "Paradas",
+						"type": "array",
+						"input": "select-multiple",
+						"lookup_query_name": "busStops",
+						"lookup_key": "name"
+					},
+					{
+						"name": "travelers",
+						"title": "Clientes",
+						"type": "array",
+						"input": "select-multiple"
+					},
+					{
+						"name": "documents",
+						"title": "Documentos",
+						"type": "array"
+					},
+					{
+						"name": "restaurants",
+						"title": "Restaurantes",
+						"type": "array",
+						"input": "select-multiple"
+					},
+					{
+						"name": "hotels",
+						"title": "Hoteles",
+						"type": "array",
+						"input": "select-multiple"
+					},
+					{
+						"name": "rooming",
+						"title": "Habitaciones",
+						"type": "array"
+					},
+					{
+						"name": "notes",
+						"title": "Notas",
+						"type": "string",
+						"input": "textarea"
+					},
+					{
+						"name": "tags",
+						"title": "Tags",
+						"type": "array",
+						"input": "tags"
+					}
+				]
+			}
+		],
+		"queries": [
+			{
+				"name": "current_user_data",
+				"collection": "users",
+				"filter": {
+					"_id": "Meteor.userId()"
+				},
+				"find_one": true
+			},
+			{
+				"name": "current_user_data",
+				"collection": "users",
+				"filter": {
+					"_id": "Meteor.userId()"
+				},
+				"find_one": true
+			},
+			{
+				"name": "clients",
+				"collection": "clients"
+			},
+			{
+				"name": "clients_empty",
+				"collection": "clients",
+				"filter": {
+					"_id": null
+				},
+				"find_one": true
+			},
+			{
+				"name": "client",
+				"collection": "clients",
+				"filter": {
+					"_id": ":clientId"
+				},
+				"find_one": true
+			},
+			{
+				"name": "travelers",
+				"collection": "travelers"
+			},
+			{
+				"name": "travelers_empty",
+				"collection": "travelers",
+				"filter": {
+					"_id": null
+				},
+				"find_one": true
+			},
+			{
+				"name": "traveler",
+				"collection": "travelers",
+				"filter": {
+					"_id": ":travelerId"
+				},
+				"find_one": true
+			},
+			{
+				"name": "seats",
+				"collection": "seats"
+			},
+			{
+				"name": "seats_empty",
+				"collection": "seats",
+				"filter": {
+					"_id": null
+				},
+				"find_one": true
+			},
+			{
+				"name": "seat",
+				"collection": "seats",
+				"filter": {
+					"_id": ":seatId"
+				},
+				"find_one": true
+			},
+			{
+				"name": "suppliers",
+				"collection": "suppliers"
+			},
+			{
+				"name": "suppliers_empty",
+				"collection": "suppliers",
+				"filter": {
+					"_id": null
+				},
+				"find_one": true
+			},
+			{
+				"name": "supplier",
+				"collection": "suppliers",
+				"filter": {
+					"_id": ":supplierId"
+				},
+				"find_one": true
+			},
+			{
+				"name": "travels",
+				"collection": "travels"
+			},
+			{
+				"name": "travels_empty",
+				"collection": "travels",
+				"filter": {
+					"_id": null
+				},
+				"find_one": true
+			},
+			{
+				"name": "travel",
+				"collection": "travels",
+				"filter": {
+					"_id": ":travelId"
+				},
+				"find_one": true
+			},
+			{
+				"name": "busStops",
+				"collection": "busStops"
+			},
+			{
+				"name": "busStops_empty",
+				"collection": "busStops",
+				"filter": {
+					"_id": null
+				},
+				"find_one": true
+			},
+			{
+				"name": "busStop",
+				"collection": "busStops",
+				"filter": {
+					"_id": ":busStopId"
+				},
+				"find_one": true
+			},
+			{
+				"name": "travelBuses",
+				"collection": "travelBuses"
+			},
+			{
+				"name": "travelBuses_empty",
+				"collection": "travelBuses",
+				"filter": {
+					"_id": null
+				},
+				"find_one": true
+			},
+			{
+				"name": "travelBus",
+				"collection": "travelBuses",
+				"filter": {
+					"_id": ":travelBusId"
+				},
+				"find_one": true
+			}
+		],
+		"public_zone": {
+			"navbar_class": "navbar-inverse navbar-fixed-top",
+			"pages": [
+				{
+					"name": "home_public",
+					"components": [
+						{
+							"name": "home_jumbotron",
+							"title": "Example application",
+							"type": "jumbotron",
+							"text": "<b>This <a href=\"https://www.meteor.com\" target=\"_blank\">Meteor</a> application is made with <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">meteor-kitchen</a> without manual coding.</b><br />It demonstrates how to create application with login, register and forgot password functions.<br />Source code (input file for generator) is <a href=\"https://github.com/perak/kitchen-examples/tree/master/example-accounts\" target=\"_blank\">here</a>.",
+							"button_title": "Continue &raquo;",
+							"button_route": "login"
+						}
+					],
+					"type": "page"
+				},
+				{
+					"name": "login",
+					"template": "login",
+					"type": "page"
+				},
+				{
+					"name": "register",
+					"template": "register",
+					"type": "page"
+				},
+				{
+					"name": "forgot_password",
+					"template": "forgot_password",
+					"type": "page"
+				},
+				{
+					"name": "reset_password",
+					"template": "reset_password",
+					"route_params": [
+						"resetPasswordToken"
+					],
+					"type": "page"
+				}
+			],
+			"components": [
+				{
+					"name": "left_menu",
+					"type": "menu",
+					"class": "nav navbar-nav",
+					"dest_selector": "#menu",
+					"items": [
+						{
+							"title": "Home",
+							"route": "home_public"
+						}
+					]
+				},
+				{
+					"name": "right_menu",
+					"type": "menu",
+					"class": "nav navbar-nav navbar-right",
+					"dest_selector": "#menu",
+					"items": [
+						{
+							"title": "Register",
+							"route": "register"
+						},
+						{
+							"title": "Login",
+							"route": "login"
+						}
+					]
+				}
+			],
+			"type": "zone"
+		},
+		"private_zone": {
+			"navbar_class": "navbar-default navbar-fixed-top",
+			"pages": [
+				{
+					"name": "home_private",
+					"title": "Welcome {{userFullName}}!",
+					"type": "page"
+				},
+				{
+					"name": "user_settings",
+					"pages": [
+						{
+							"name": "profile",
+							"components": [
+								{
+									"name": "edit_form",
+									"type": "form",
+									"mode": "update",
+									"title": "Edit your profile",
+									"submit_route": "user_settings.profile",
+									"query_name": "current_user_data",
+									"fields": [
+										{
+											"name": "profile.name",
+											"title": "Name",
+											"required": true,
+											"type": "string"
+										},
+										{
+											"name": "profile.email",
+											"title": "E-mail",
+											"type": "email",
+											"required": true
+										},
+										{
+											"name": "profile.facebook",
+											"title": "Facebook URL",
+											"type": "string"
+										},
+										{
+											"name": "profile.google",
+											"title": "Google+ URL",
+											"type": "string"
+										},
+										{
+											"name": "profile.twitter",
+											"title": "Twitter ID",
+											"type": "string"
+										},
+										{
+											"name": "profile.website",
+											"title": "Website URL",
+											"type": "string"
+										}
+									]
+								}
+							],
+							"type": "page"
+						},
+						{
+							"name": "change_pass",
+							"template": "change_pass",
+							"type": "page"
+						}
+					],
+					"components": [
+						{
+							"name": "side_menu",
+							"type": "menu",
+							"class": "nav nav-stacked nav-pills",
+							"items": [
+								{
+									"title": "Profile",
+									"route": "user_settings.profile"
+								},
+								{
+									"title": "Change password",
+									"route": "user_settings.change_pass"
+								}
+							]
+						}
+					],
+					"type": "page"
+				},
+				{
+					"name": "logout",
+					"template": "logout",
+					"type": "page"
+				},
+				{
+					"name": "bd",
+					"type": "page"
+				},
+				{
+					"name": "call",
+					"type": "page"
+				},
+				{
+					"name": "note",
+					"type": "page"
+				},
+				{
+					"name": "invoices",
+					"type": "page"
+				},
+				{
+					"name": "pickup",
+					"type": "page"
+				}
+			],
+			"components": [
+				{
+					"name": "left_menu",
+					"type": "menu",
+					"class": "nav navbar-nav",
+					"dest_selector": "#menu",
+					"items": [
+						{
+							"title": "Inicio",
+							"route": "home_private"
+						},
+						{
+							"title": "Modo recogida"
+						},
+						{
+							"title": "Modo llamada"
+						},
+						{
+							"title": "Modo anotar clientes"
+						},
+						{
+							"title": "Transacciones"
+						},
+						{
+							"title": "Base de datos"
+						}
+					]
+				},
+				{
+					"name": "right_menu",
+					"type": "menu",
+					"class": "nav navbar-nav navbar-right",
+					"dest_selector": "#menu",
+					"items": [
+						{
+							"title": "{{userEmail}}",
+							"items": [
+								{
+									"title": "Settings",
+									"route": "user_settings"
+								},
+								{
+									"title": "Logout",
+									"route": "logout"
+								}
+							]
+						}
+					]
+				}
+			],
+			"type": "zone"
+		},
+		"free_zone": {
+			"type": "zone"
+		},
+		"packages": {}
+	}
+}
