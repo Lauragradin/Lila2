@@ -475,6 +475,42 @@
 						"input": "tags"
 					}
 				]
+			},
+			{
+				"name": "rooms",
+				"type": "collection",
+				"fields": [
+					{
+						"name": "supplier",
+						"title": "Proveedor",
+						"type": "string",
+						"input": "select"
+					},
+					{
+						"name": "start",
+						"title": "Día de entrada",
+						"type": "date",
+						"input": "datepicker"
+					},
+					{
+						"name": "end",
+						"title": "Día de salida",
+						"type": "date",
+						"input": "datepicker"
+					},
+					{
+						"name": "travelers",
+						"title": "Clientes",
+						"type": "array",
+						"input": "select-multiple"
+					},
+					{
+						"name": "notes",
+						"title": "Notas",
+						"type": "string",
+						"input": "textarea"
+					}
+				]
 			}
 		],
 		"queries": [
@@ -633,6 +669,13 @@
 					"_id": ":travelBusId"
 				},
 				"find_one": true
+			},
+			{
+				"name": "suppliers_Filter",
+				"collection": "suppliers",
+				"filter": {
+					"type": ":type"
+				}
 			}
 		],
 		"public_zone": {
@@ -645,7 +688,7 @@
 							"name": "home_jumbotron",
 							"title": "Example application",
 							"type": "jumbotron",
-							"text": "<b>This <a href=\"https://www.meteor.com\" target=\"_blank\">Meteor</a> application is made with <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">meteor-kitchen</a> without manual coding.</b><br />It demonstrates how to create application with login, register and forgot password functions.<br />Source code (input file for generator) is <a href=\"https://github.com/perak/kitchen-examples/tree/master/example-accounts\" target=\"_blank\">here</a>.",
+							"text": "Bienvenido a la aplicación de viajes Lila.<br/>\t\t\t\nSi desea empezar a usar la aplicación, por favor conéctese para acceder a las diferentes opciones.",
 							"button_title": "Continue &raquo;",
 							"button_route": "login"
 						}
@@ -714,7 +757,14 @@
 				{
 					"name": "home_private",
 					"title": "Welcome {{userFullName}}!",
-					"type": "page"
+					"type": "page",
+					"components": [
+						{
+							"name": "home_private",
+							"text": "Por favor tenga en cuenta que la aplicación aún está en desarrollo por lo que es muy posible que tenga algunos errores.<br />\t\t\t\nSi encuentra alguno comuníquenoslo y será solucionado en la mayor brevedad posible<br/>\t\t\t\nAtentamente el equipo de desarrollo.",
+							"type": "jumbotron"
+						}
+					]
 				},
 				{
 					"name": "user_settings",
@@ -799,7 +849,140 @@
 				},
 				{
 					"name": "bd",
-					"type": "page"
+					"type": "page",
+					"components": [
+						{
+							"name": "bd_menu",
+							"class": "nav nav-pills nav-stacked",
+							"type": "menu",
+							"items": [
+								{
+									"title": "Viajes",
+									"route": "bd.travels"
+								},
+								{
+									"title": "Proveedores",
+									"route": "bd.suppliers"
+								},
+								{
+									"title": "Clientes",
+									"route": "bd.clients"
+								},
+								{
+									"title": "Autobuses",
+									"route": "bd.buses"
+								},
+								{
+									"title": "Paradas",
+									"route": "bd.busStops"
+								},
+								{
+									"title": "Asientos",
+									"route": "bd.seats"
+								},
+								{
+									"title": "Habitaciones",
+									"route": "bd.rooms"
+								}
+							]
+						}
+					],
+					"pages": [
+						{
+							"name": "travels",
+							"type": "page"
+						},
+						{
+							"name": "suppliers",
+							"type": "page",
+							"components": [
+								{
+									"name": "view",
+									"title": "Proveedores",
+									"query_name": "suppliers",
+									"text_if_empty": "No hay proveedores",
+									"insert_route": "bd.suppliers.insert",
+									"details_route": "bd.suppliers.details",
+									"edit_route": "bd.suppliers.edit",
+									"insert_button_title": "Nuevo proveedor",
+									"type": "data_view"
+								}
+							],
+							"pages": [
+								{
+									"name": "insert",
+									"type": "page",
+									"components": [
+										{
+											"name": "insert_form",
+											"title": "Nuevo proveedor",
+											"query_name": "suppliers_empty",
+											"mode": "insert",
+											"submit_route": "bd.suppliers",
+											"cancel_route": "bd.suppliers",
+											"type": "form"
+										}
+									]
+								},
+								{
+									"name": "details",
+									"route_params": [
+										"supplierId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "details_form",
+											"title": "Detalles",
+											"query_name": "supplier",
+											"mode": "read_only",
+											"close_route": "bd.suppliers",
+											"back_route": "bd.suppliers",
+											"type": "form"
+										}
+									]
+								},
+								{
+									"name": "edit",
+									"route_params": [
+										"supplierId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "supplierId",
+											"title": "Editar proveedor",
+											"query_name": "supplier",
+											"mode": "update",
+											"submit_route": "bd.suppliers",
+											"cancel_route": "bd.suppliers",
+											"type": "form"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "clients",
+							"type": "page"
+						},
+						{
+							"name": "buses",
+							"type": "page"
+						},
+						{
+							"name": "busStops",
+							"type": "page"
+						},
+						{
+							"name": "seats",
+							"type": "page"
+						},
+						{
+							"name": "rooms",
+							"type": "page"
+						}
+					]
 				},
 				{
 					"name": "call",
@@ -830,19 +1013,24 @@
 							"route": "home_private"
 						},
 						{
-							"title": "Modo recogida"
+							"title": "Modo recogida",
+							"route": "pickup"
 						},
 						{
-							"title": "Modo llamada"
+							"title": "Modo llamada",
+							"route": "call"
 						},
 						{
-							"title": "Modo anotar clientes"
+							"title": "Modo anotar clientes",
+							"route": "note"
 						},
 						{
-							"title": "Transacciones"
+							"title": "Transacciones",
+							"route": "invoices"
 						},
 						{
-							"title": "Base de datos"
+							"title": "Base de datos",
+							"route": "bd"
 						}
 					]
 				},
