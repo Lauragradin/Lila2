@@ -571,6 +571,26 @@
 				"find_one": true
 			},
 			{
+				"name": "rooms",
+				"collection": "rooms"
+			},
+			{
+				"name": "rooms_empty",
+				"collection": "rooms",
+				"filter": {
+					"_id": null
+				},
+				"find_one": true
+			},
+			{
+				"name": "room",
+				"collection": "rooms",
+				"filter": {
+					"_id": ":roomId"
+				},
+				"find_one": true
+			},
+			{
 				"name": "seats",
 				"collection": "seats"
 			},
@@ -900,7 +920,9 @@
 											"mode": "insert",
 											"submit_route": "bd.suppliers",
 											"cancel_route": "bd.suppliers",
-											"type": "form"
+											"type": "form",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar"
 										}
 									]
 								},
@@ -918,7 +940,8 @@
 											"mode": "read_only",
 											"close_route": "bd.suppliers",
 											"back_route": "bd.suppliers",
-											"type": "form"
+											"type": "form",
+											"layout": "horizontal"
 										}
 									]
 								},
@@ -930,13 +953,15 @@
 									"type": "page",
 									"components": [
 										{
-											"name": "supplierId",
+											"name": "edit_form",
 											"title": "Editar proveedor",
 											"query_name": "supplier",
 											"mode": "update",
 											"submit_route": "bd.suppliers",
 											"cancel_route": "bd.suppliers",
-											"type": "form"
+											"type": "form",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar"
 										}
 									]
 								}
@@ -944,23 +969,455 @@
 						},
 						{
 							"name": "clients",
-							"type": "page"
+							"type": "page",
+							"components": [
+								{
+									"name": "view",
+									"title": "Clientes",
+									"query_name": "clients",
+									"text_if_empty": "No hay clientes.",
+									"insert_route": "bd.clients.insert",
+									"details_route": "bd.clients.details",
+									"edit_route": "bd.clients.edit",
+									"insert_button_title": "Nuevo cliente",
+									"type": "data_view"
+								}
+							],
+							"pages": [
+								{
+									"name": "insert",
+									"type": "page",
+									"components": [
+										{
+											"name": "insert_form",
+											"title": "Clientes",
+											"query_name": "clients_empty",
+											"mode": "insert",
+											"submit_route": "bd.clients",
+											"cancel_route": "bd.clients",
+											"type": "form",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar"
+										}
+									]
+								},
+								{
+									"name": "edit",
+									"route_params": [
+										"clientId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "edit_form",
+											"title": "Editar cliente",
+											"query_name": "client",
+											"mode": "update",
+											"submit_route": "bd.clients",
+											"cancel_route": "bd.clients",
+											"type": "form",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar"
+										}
+									]
+								},
+								{
+									"name": "details",
+									"route_params": [
+										"clientId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "details_form",
+											"title": "Detalles",
+											"query_name": "client",
+											"mode": "read_only",
+											"layout": "horizontal",
+											"close_route": "bd.clients",
+											"back_route": "bd.clients",
+											"type": "form"
+										}
+									]
+								}
+							]
 						},
 						{
 							"name": "buses",
-							"type": "page"
+							"type": "page",
+							"components": [
+								{
+									"name": "view",
+									"title": "Autobuses",
+									"query_name": "travelBuses",
+									"text_if_empty": "No hay autobuses.",
+									"insert_route": "bd.buses.insert",
+									"details_route": "bd.buses.details",
+									"edit_route": "bd.buses.edit",
+									"type": "data_view",
+									"insert_button_title": "Nuevo autobús"
+								}
+							],
+							"pages": [
+								{
+									"name": "insert",
+									"type": "page",
+									"components": [
+										{
+											"name": "insert_form",
+											"title": "Nuevo autobús",
+											"query_name": "travelBuses_empty",
+											"mode": "insert",
+											"submit_route": "bd.buses",
+											"cancel_route": "bd.buses",
+											"type": "form",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar"
+										}
+									]
+								},
+								{
+									"name": "edit",
+									"route_params": [
+										"travelBusId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "edit_form",
+											"title": "Editar autobús",
+											"query_name": "travelBus",
+											"mode": "update",
+											"submit_route": "bd.buses",
+											"cancel_route": "bd.buses",
+											"type": "form",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar"
+										}
+									]
+								},
+								{
+									"name": "details",
+									"route_params": [
+										"travelBusId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "details_form",
+											"title": "Detalles",
+											"query_name": "travelBus",
+											"mode": "read_only",
+											"layout": "horizontal",
+											"close_route": "bd.buses",
+											"back_route": "bd.buses",
+											"type": "form"
+										}
+									]
+								}
+							]
 						},
 						{
 							"name": "busStops",
-							"type": "page"
+							"type": "page",
+							"components": [
+								{
+									"name": "view",
+									"title": "Paradas",
+									"query_name": "busStops",
+									"text_if_empty": "No hay paradas.",
+									"insert_route": "bd.busStops.insert",
+									"details_route": "bd.busStops.details",
+									"edit_route": "bd.busStops.details",
+									"insert_button_title": "Nueva parada",
+									"type": "data_view"
+								}
+							],
+							"pages": [
+								{
+									"name": "insert",
+									"type": "page",
+									"components": [
+										{
+											"name": "insert_form",
+											"title": "Nueva parada",
+											"query_name": "busStops_empty",
+											"mode": "insert",
+											"submit_route": "bd.busStops",
+											"cancel_route": "bd.busStops",
+											"type": "form",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar"
+										}
+									]
+								},
+								{
+									"name": "edit",
+									"route_params": [
+										"busStopId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "edit_form",
+											"title": "Editar parada",
+											"query_name": "busStop",
+											"mode": "update",
+											"submit_route": "bd.busStops",
+											"cancel_route": "bd.busStops",
+											"type": "form",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar"
+										}
+									]
+								},
+								{
+									"name": "details",
+									"route_params": [
+										"busStopId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "details_form",
+											"title": "Detalles",
+											"query_name": "busStop",
+											"mode": "read_only",
+											"layout": "horizontal",
+											"close_route": "bd.busStops",
+											"back_route": "bd.busStops",
+											"type": "form"
+										}
+									]
+								}
+							]
 						},
 						{
 							"name": "seats",
-							"type": "page"
+							"type": "page",
+							"components": [
+								{
+									"name": "view",
+									"title": "Asientos",
+									"query_name": "seats",
+									"text_if_empty": "No hay asientos.",
+									"insert_route": "bd.seats.insert",
+									"details_route": "bd.seats.details",
+									"edit_route": "bd.seats.edit",
+									"insert_button_title": "Nuevo asiento",
+									"type": "data_view"
+								}
+							],
+							"pages": [
+								{
+									"name": "insert",
+									"type": "page",
+									"components": [
+										{
+											"name": "insert_form",
+											"title": "Nuevo asiento",
+											"query_name": "seats_empty",
+											"mode": "insert",
+											"submit_route": "bd.seats",
+											"cancel_route": "bd.seats",
+											"type": "form",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar"
+										}
+									]
+								},
+								{
+									"name": "edit",
+									"route_params": [
+										"seatId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "edit_form",
+											"title": "Editar asiento",
+											"query_name": "seat",
+											"mode": "update",
+											"submit_route": "bd.seats",
+											"cancel_route": "bd.seats",
+											"type": "form",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar"
+										}
+									]
+								},
+								{
+									"name": "details",
+									"route_params": [
+										"seatId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "details_form",
+											"title": "Detalles",
+											"query_name": "seat",
+											"mode": "read_only",
+											"layout": "horizontal",
+											"close_route": "bd.seats",
+											"back_route": "bd.seats",
+											"type": "form"
+										}
+									]
+								}
+							]
 						},
 						{
 							"name": "rooms",
-							"type": "page"
+							"type": "page",
+							"pages": [
+								{
+									"name": "insert",
+									"type": "page",
+									"components": [
+										{
+											"name": "insert_form",
+											"title": "Nueva habitación",
+											"mode": "insert",
+											"type": "form",
+											"query_name": "rooms_empty",
+											"submit_route": "bd.rooms",
+											"cancel_route": "bd.rooms",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar"
+										}
+									]
+								},
+								{
+									"name": "edit",
+									"route_params": [
+										"roomId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "edit_form",
+											"title": "Editar habitación",
+											"query_name": "room",
+											"mode": "update",
+											"submit_route": "bd.rooms",
+											"cancel_route": "bd.rooms",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar",
+											"type": "form"
+										}
+									]
+								},
+								{
+									"name": "details",
+									"route_params": [
+										"roomId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "details_form",
+											"title": "Detalles",
+											"query_name": "room",
+											"mode": "read_only",
+											"layout": "horizontal",
+											"close_route": "bd.rooms",
+											"back_route": "bd.rooms",
+											"type": "form"
+										}
+									]
+								}
+							],
+							"components": [
+								{
+									"name": "view",
+									"title": "Habitaciones",
+									"query_name": "rooms",
+									"text_if_empty": "No hay habitaciones.",
+									"insert_route": "bd.rooms.insert",
+									"details_route": "bd.rooms.details",
+									"edit_route": "bd.clients.edit",
+									"insert_button_title": "Nueva habitación",
+									"type": "data_view"
+								}
+							]
+						},
+						{
+							"name": "travelers",
+							"type": "page",
+							"components": [
+								{
+									"name": "view",
+									"title": "Viajeros",
+									"query_name": "travelers",
+									"text_if_empty": "No hay viajeros",
+									"insert_route": "bd.travelers.insert",
+									"details_route": "bd.travelers.details",
+									"edit_route": "bd.travelers.edit",
+									"insert_button_title": "Nuevo viajero",
+									"type": "data_view"
+								}
+							],
+							"pages": [
+								{
+									"name": "insert",
+									"type": "page",
+									"components": [
+										{
+											"name": "insert_form",
+											"title": "Insertar viajero",
+											"query_name": "travelers_empty",
+											"submit_route": "bd.travelers",
+											"cancel_route": "bd.travelers",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar",
+											"type": "form",
+											"mode": "insert"
+										}
+									]
+								},
+								{
+									"name": "edit",
+									"route_params": [
+										"travelerId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "edit_form",
+											"title": "Editar viajero",
+											"query_name": "traveler",
+											"mode": "update",
+											"submit_route": "bd.travelers",
+											"cancel_route": "bd.travelers",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar",
+											"type": "form"
+										}
+									]
+								},
+								{
+									"name": "details",
+									"route_params": [
+										"travelerId"
+									],
+									"type": "page",
+									"components": [
+										{
+											"name": "details_form",
+											"title": "Detalles",
+											"query_name": "traveler",
+											"mode": "read_only",
+											"layout": "horizontal",
+											"close_route": "bd.travelers",
+											"back_route": "bd.travelers",
+											"submit_button_title": "Guardar",
+											"cancel_button_title": "Cancelar",
+											"type": "form"
+										}
+									]
+								}
+							]
 						}
 					]
 				},
