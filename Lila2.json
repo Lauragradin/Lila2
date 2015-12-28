@@ -776,7 +776,7 @@
 									"name": "edit_form",
 									"type": "form",
 									"mode": "update",
-									"title": "Edit your profile",
+									"title": "Edita tu perfil",
 									"submit_route": "user_settings.profile",
 									"query_name": "current_user_data",
 									"fields": [
@@ -791,26 +791,6 @@
 											"title": "E-mail",
 											"type": "email",
 											"required": true
-										},
-										{
-											"name": "profile.facebook",
-											"title": "Facebook URL",
-											"type": "string"
-										},
-										{
-											"name": "profile.google",
-											"title": "Google+ URL",
-											"type": "string"
-										},
-										{
-											"name": "profile.twitter",
-											"title": "Twitter ID",
-											"type": "string"
-										},
-										{
-											"name": "profile.website",
-											"title": "Website URL",
-											"type": "string"
 										}
 									]
 								}
@@ -830,11 +810,11 @@
 							"class": "nav nav-stacked nav-pills",
 							"items": [
 								{
-									"title": "Profile",
+									"title": "Perfil",
 									"route": "user_settings.profile"
 								},
 								{
-									"title": "Change password",
+									"title": "Cambiar la contraseña",
 									"route": "user_settings.change_pass"
 								}
 							]
@@ -1044,11 +1024,11 @@
 							"title": "{{userEmail}}",
 							"items": [
 								{
-									"title": "Settings",
+									"title": "Configuración",
 									"route": "user_settings"
 								},
 								{
-									"title": "Logout",
+									"title": "Desconectarse",
 									"route": "logout"
 								}
 							]
